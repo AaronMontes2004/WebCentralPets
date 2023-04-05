@@ -3,6 +3,12 @@ import React, { useState } from "react";
 import vetWithPetImage from "../../assets/img/vetWithPet.jpg"
 import cats from "../../assets/img/cats.jpg"
 import petClothes from "../../assets/img/petClothes.jpg"
+import reservacionIcon from "../../assets/img/QuienesSomos/reservacion.png"
+import hospitalizacionIcon from "../../assets/img/QuienesSomos/hospitalizacion.png"
+import cosmeticosIcon from "../../assets/img/QuienesSomos/cosmeticos.png"
+import vestimentasIcon from "../../assets/img/QuienesSomos/vestimentas.png"
+import tratamientosIcon from "../../assets/img/QuienesSomos/tratamiento.png"
+import consultasIcon from "../../assets/img/QuienesSomos/consulta.png"
 
 const Menu = () => {
   const [user, setUser] = useState({
@@ -154,6 +160,56 @@ const Menu = () => {
           </span>
         </button>
       </div>
+
+      {/*  ¿QUE OFRECEMOS?  */ }
+      <div className="w-full min-h-[250px] h-auto flex flex-col items-center py-10" >
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-dosis font-bold text-center">¿Que ofrecemos?</h1>
+        <div className="w-[90%] grid grid-cols-2 grid-rows-3 gap-x-2 gap-y-6 mt-10 md:grid-cols-3 md:grid-rows-2">
+          <div className="w-full h-full flex flex-col items-center">
+            <img src={reservacionIcon} alt="Reservaciones" className="w-16 h-16 object-cover drop-shadow-md duration-200 hover:scale-105"/>
+            <h1 className="font-dosis font-bold my-2 text-base md:text-lg">Reservación</h1>
+            <p className="font-dosis text-center px-3 md:text-lg">
+              Reserva tu cita médica para ayudar a tu mascota con su mal estado de salud
+            </p>
+          </div>
+          <div className="w-full h-full flex flex-col items-center">
+            <img src={hospitalizacionIcon} alt="Reservaciones" className="w-16 h-16 object-cover drop-shadow-md duration-200 hover:scale-105"/>
+            <h1 className="font-dosis font-bold my-2 text-base md:text-lg">Hospitalización</h1>
+            <p className="font-dosis text-center px-3 md:text-lg">
+              Hospitalizamos a tus mascota en caso sea necesario para su recuperación
+            </p>
+          </div>
+          <div className="w-full h-full flex flex-col items-center">
+            <img src={cosmeticosIcon} alt="Reservaciones" className="w-16 h-16 object-cover drop-shadow-md duration-200 hover:scale-105"/>
+            <h1 className="font-dosis font-bold my-2 text-base md:text-lg">Cosméticos</h1>
+            <p className="font-dosis text-center px-3 md:text-lg">
+              Venta de productos para la salud y el higiene personal de tu mascota
+            </p>
+          </div>
+          <div className="w-full h-full flex flex-col items-center">
+            <img src={vestimentasIcon} alt="Reservaciones" className="w-16 h-16 object-cover drop-shadow-md duration-200 hover:scale-105"/>
+            <h1 className="font-dosis font-bold my-2 text-base md:text-lg">Vestimentas</h1>
+            <p className="font-dosis text-center px-3 md:text-lg">
+              Venta de ropa y accesorios para que salgas a lucir entre las personas a tu mascota
+            </p>
+          </div>
+          <div className="w-full h-full flex flex-col items-center">
+            <img src={tratamientosIcon} alt="Reservaciones" className="w-16 h-16 object-cover drop-shadow-md duration-200 hover:scale-105"/>
+            <h1 className="font-dosis font-bold my-2 text-base md:text-lg">Tratamiento</h1>
+            <p className="font-dosis text-center px-3 md:text-lg">
+              Te brindamos tratamientos para el bienestar de tu mascota según el diagnóstico
+            </p>
+          </div>
+          <div className="w-full h-full flex flex-col items-center">
+            <img src={consultasIcon} alt="Reservaciones" className="w-16 h-16 object-cover drop-shadow-md duration-200 hover:scale-105"/>
+            <h1 className="font-dosis font-bold my-2 text-base md:text-lg">Consultas</h1>
+            <p className="font-dosis text-center px-3 md:text-lg">
+              Consultario para resolverte todo tipo de dudas que tengas sobre tu mascota
+            </p>
+          </div>
+        </div>
+      </div>
+
     </>
   );
 };
