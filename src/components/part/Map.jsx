@@ -10,10 +10,10 @@ const Map = () => {
         <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={position}>
-        <Popup>
-            Veterinaria Central Pets <br /> Abierto a partir de las 8:00 am
-        </Popup>
+        <Marker position={position} draggable={true}>
+          <Popup minWidth={90}>
+              Veterinaria Central Pets <br /> Abierto a partir de las 8:00 am
+          </Popup>
         </Marker>
     </MapContainer>
   )

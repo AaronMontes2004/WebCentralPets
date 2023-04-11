@@ -10,13 +10,13 @@ const Footer = () => {
   return (
     <div className='w-full bg-overall-900 p-[0.1px] flex flex-col items-center gap-3'>
         <div className='w-11/12 flex justify-center gap-5 mt-20'>
-            <a href="https://wa.me/960116321" className='w-10 h-10 flex justify-center items-center rounded-full bg-white'>
+            <a href="https://wa.me/981558109" target='_blank' className='w-10 h-10 flex justify-center items-center rounded-full bg-white'>
                 <img src={whatsappIcon} alt="" className='w-6 h-6' />
             </a>
-            <a href="" className='w-10 h-10 flex justify-center items-center rounded-full bg-white'>
+            <a href="https://www.instagram.com/veterinariacentralpets/?fbclid=IwAR0tZE3-1CKKE_SsSMVeB7gnhMtXrzKZyUY2QhBMsiiBkrbfaCw-JVz6llQ" target='_blank' className='w-10 h-10 flex justify-center items-center rounded-full bg-white'>
                 <img src={instagramIcon} alt="" className='w-6 h-6' />
             </a>
-            <a href="" className='w-10 h-10 flex justify-center items-center rounded-full bg-white'>
+            <a href="https://www.facebook.com/veterinariacentralpets/" target='_blank' className='w-10 h-10 flex justify-center items-center rounded-full bg-white'>
                 <img src={facebookIcon} alt="" className='w-6 h-6' />
             </a>
         </div>
@@ -25,7 +25,7 @@ const Footer = () => {
                 <img src={locationIcon} alt="" className='w-6 h-6' />
                 Av. San Borja Nte. 499
             </a>
-            <a href="https://wa.me/960116321" target='_blank' className='w-auto h-10 text-white gap-1 flex justify-center items-center rounded-full font-dosis text-lg'>
+            <a href="https://wa.me/981558109" target='_blank' className='w-auto h-10 text-white gap-1 flex justify-center items-center rounded-full font-dosis text-lg'>
                 <img src={telephoneIcon} alt="" className='w-6 h-6' />
                 981-558-109
             </a>
@@ -35,7 +35,7 @@ const Footer = () => {
             </a>
         </div>
         <div className='w-11/12 flex justify-center mb-20'>
-            <p className='font-dosis text-white text-lg'><a href='https://wa.me/960116321'>Copyright</a> © 2023</p>
+            <p className='font-dosis text-white text-lg'><a href='https://wa.me/960116321' target='_blank'>Copyright</a> © 2023</p>
         </div>
     </div>
   )
