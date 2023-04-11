@@ -11,9 +11,6 @@ module.exports = {
         "lobster": ['Lobster', 'cursive'],
         "dosis": [ 'Dosis',"sans-serif"]
       },
-      backgroundImage: {
-        "search-icon": 'url(/../src/assets/icons/search.svg)'
-      },
       colors: {
         "overall": {
           "500": "#8881f5",

@@ -9,16 +9,31 @@ import cosmeticosIcon from "../../assets/img/QuienesSomos/cosmeticos.png"
 import vestimentasIcon from "../../assets/img/QuienesSomos/vestimentas.png"
 import tratamientosIcon from "../../assets/img/QuienesSomos/tratamiento.png"
 import consultasIcon from "../../assets/img/QuienesSomos/consulta.png"
+import { Link } from "react-router-dom";
+import vestimentaDog1 from "../../assets/img/NuestrosProductos/vestimentas/vestimentasDog1.png"
+import vestimentaDog2 from "../../assets/img/NuestrosProductos/vestimentas/vestimentasDog2.png"
+import vestimentaCat1 from "../../assets/img/NuestrosProductos/vestimentas/vestimentasCat1.png"
+import vestimentaCat2 from "../../assets/img/NuestrosProductos/vestimentas/vestimentasCat2.png"
+import cosmeticoDog1 from "../../assets/img/NuestrosProductos/cosmeticos/cosmeticosDog1.png"
+import cosmeticoDog2 from "../../assets/img/NuestrosProductos/cosmeticos/cosmeticosDog2.png"
+import cosmeticoCat1 from "../../assets/img/NuestrosProductos/cosmeticos/cosmeticosCat1.png"
+import cosmeticoCat2 from "../../assets/img/NuestrosProductos/cosmeticos/cosmeticosCat2.png"
+import veterinario1 from "../../assets/img/NuestroEquipo/veterinaria1.png"
+import veterinaria1 from "../../assets/img/NuestroEquipo/veterinaria2.png"
+import veterinaria2 from "../../assets/img/NuestroEquipo/veterinaria3.png"
+import Map from "../part/Map";
+import Footer from "../part/Footer";
 
 const Menu = () => {
-  const [user, setUser] = useState({
+  /* const [user, setUser] = useState({
     nameUser: Cookies.get("name") || "",
     lastnameUser: Cookies.get("lastname") || "",
     email: Cookies.get("email") || "",
     user: Cookies.get("user") || "",
-  });
+  }); */
   return (
     <>
+      {/* El Carousel */}
       <div
         id="carouselExampleCaptions"
         className="relative z-10"
@@ -210,6 +225,159 @@ const Menu = () => {
         </div>
       </div>
 
+      {/* Nuestros productos */}
+      <div className="w-full min-h-[250px] flex flex-col items-center py-10">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-dosis font-bold text-center">Nuestros productos</h1>
+        <div className="relative w-[90%] mt-6 xl:w-max">
+          <div className="w-full flex justify-between items-center">
+            <h1 className="font-dosis text-xl">Vestimentas:</h1>
+            <Link className="font-dosis py-2 px-8 rounded-2xl bg-overall-600 text-white duration-200 hover:scale-105" href="">Ver más</Link>
+          </div>
+          <div className="w-full flex justify-center flex-wrap gap-y-5 gap-x-3 py-4 xl:gap-x-8">
+            <div className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
+              <div className="w-[80%] h-24 md:h-36 lg:h-44 xl:h-48 rounded-md overflow-hidden relative">
+                <img src={vestimentaDog1} alt="Vestimenta" className="w-full h-full object-cover" />
+              </div>
+              <div className="w-[80%] overflow-hidden relative">
+                <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl">Ropa decorativa</h1>
+                <h1 className="font-dosis w-full truncate xl:text-xl">S/ 12.00</h1>
+                <a href="#" className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</a>
+              </div>
+            </div>
+            <div className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
+              <div className="w-[80%] h-24 md:h-36 lg:h-44 xl:h-48 rounded-md overflow-hidden relative">
+                <img src={vestimentaCat1} alt="Vestimenta" className="w-full h-full object-cover" />
+              </div>
+              <div className="w-[80%] overflow-hidden relative">
+                <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl">Ropa decorativa</h1>
+                <h1 className="font-dosis w-full truncate xl:text-xl">S/ 12.00</h1>
+                <a href="#" className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</a>
+              </div>
+            </div>
+            <div className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
+              <div className="w-[80%] h-24 md:h-36 lg:h-44 xl:h-48 rounded-md overflow-hidden relative">
+                <img src={vestimentaCat2} alt="Vestimenta" className="w-full h-full object-cover" />
+              </div>
+              <div className="w-[80%] overflow-hidden relative">
+                <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl">Ropa decorativa</h1>
+                <h1 className="font-dosis w-full truncate xl:text-xl">S/ 12.00</h1>
+                <a href="#" className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</a>
+              </div>
+            </div>
+            <div className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
+              <div className="w-[80%] h-24 md:h-36 lg:h-44 xl:h-48 rounded-md overflow-hidden relative">
+                <img src={vestimentaDog2} alt="Vestimenta" className="w-full h-full object-cover" />
+              </div>
+              <div className="w-[80%] overflow-hidden relative">
+                <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl">Ropa decorativa</h1>
+                <h1 className="font-dosis w-full truncate xl:text-xl">S/ 12.00</h1>
+                <a href="#" className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="relative w-[90%] mt-6 xl:w-max">
+          <div className="w-full flex justify-between items-center">
+            <h1 className="font-dosis text-xl">Cosméticos:</h1>
+            <Link className="font-dosis py-2 px-8 rounded-2xl bg-overall-600 text-white duration-200 hover:scale-105" href="">Ver más</Link>
+          </div>
+          <div className="w-full flex justify-center flex-wrap gap-y-5 gap-x-3 py-4 xl:gap-x-8">
+            <div className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
+              <div className="w-[80%] h-24 md:h-36 lg:h-44 xl:h-48 rounded-md overflow-hidden relative">
+                <img src={cosmeticoDog1} alt="Vestimenta" className="w-full h-full object-cover" />
+              </div>
+              <div className="w-[80%] overflow-hidden relative">
+                <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl">Ropa decorativa</h1>
+                <h1 className="font-dosis w-full truncate xl:text-xl">S/ 12.00</h1>
+                <a href="#" className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</a>
+              </div>
+            </div>
+            <div className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
+              <div className="w-[80%] h-24 md:h-36 lg:h-44 xl:h-48 rounded-md overflow-hidden relative">
+                <img src={cosmeticoCat1} alt="Vestimenta" className="w-full h-full object-cover" />
+              </div>
+              <div className="w-[80%] overflow-hidden relative">
+                <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl">Ropa decorativa</h1>
+                <h1 className="font-dosis w-full truncate xl:text-xl">S/ 12.00</h1>
+                <a href="#" className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</a>
+              </div>
+            </div>
+            <div className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
+              <div className="w-[80%] h-24 md:h-36 lg:h-44 xl:h-48 rounded-md overflow-hidden relative">
+                <img src={cosmeticoCat2} alt="Vestimenta" className="w-full h-full object-cover" />
+              </div>
+              <div className="w-[80%] overflow-hidden relative">
+                <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl">Ropa decorativa</h1>
+                <h1 className="font-dosis w-full truncate xl:text-xl">S/ 12.00</h1>
+                <a href="#" className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</a>
+              </div>
+            </div>
+            <div className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
+              <div className="w-[80%] h-24 md:h-36 lg:h-44 xl:h-48 rounded-md overflow-hidden relative">
+                <img src={cosmeticoDog2} alt="Vestimenta" className="w-full h-full object-cover" />
+              </div>
+              <div className="w-[80%] overflow-hidden relative">
+                <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl">Ropa decorativa</h1>
+                <h1 className="font-dosis w-full truncate xl:text-xl">S/ 12.00</h1>
+                <a href="#" className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Nuestro equipo */}
+      <div className="w-full min-h-[250px] flex flex-col items-center py-10">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-dosis font-bold text-center">Nuestro equipo</h1>
+        <div className="w-11/12 flex justify-center flex-wrap gap-x-3 gap-y-5 items-center my-8">
+          <div className="flex flex-col justify-center items-center">
+            <div className="w-28 h-28 overflow-hidden rounded-t-lg shadow-lg lg:w-40 lg:h-40">
+              <img src={veterinario1} alt="" className="w-full h-full object-cover" />
+            </div>
+            <div className="w-48 px-4 bg-sky-500 overflow-hidden rounded-3xl lg:w-56">
+              <h1 className="font-dosis w-full truncate py-1.5 text-center text-white lg:py-2.5 lg:text-lg" title="AEA">Dr. Emenejildo Jose Antonio Alfredo</h1>
+            </div>
+            <div className="w-40 px-4 bg-overall-900 overflow-hidden rounded-b-3xl lg:w-44 shadow-lg">
+              <h1 className="font-dosis w-full truncate py-1.5 text-center text-white lg:py-2.5 lg:text-lg" title="AEA">Odontologo</h1>
+            </div>
+          </div>  
+          <div className="flex flex-col justify-center items-center">
+            <div className="w-28 h-28 overflow-hidden rounded-t-lg shadow-lg lg:w-40 lg:h-40">
+              <img src={veterinaria1} alt="" className="w-full h-full object-cover" />
+            </div>
+            <div className="w-48 px-4 bg-sky-500 overflow-hidden rounded-3xl lg:w-56">
+              <h1 className="font-dosis w-full truncate py-1.5 text-center text-white lg:py-2.5 lg:text-lg" title="AEA">Dr. Emenejildo Jose Antonio Alfredo</h1>
+            </div>
+            <div className="w-40 px-4 bg-overall-900 overflow-hidden rounded-b-3xl lg:w-44 shadow-lg">
+              <h1 className="font-dosis w-full truncate py-1.5 text-center text-white lg:py-2.5 lg:text-lg" title="AEA">Odontologo</h1>
+            </div>
+          </div> 
+          <div className="flex flex-col justify-center items-center">
+            <div className="w-28 h-28 overflow-hidden rounded-t-lg shadow-lg lg:w-40 lg:h-40">
+              <img src={veterinaria2} alt="" className="w-full h-full object-cover" />
+            </div>
+            <div className="w-48 px-4 bg-sky-500 overflow-hidden rounded-3xl lg:w-56">
+              <h1 className="font-dosis w-full truncate py-1.5 text-center text-white lg:py-2.5 lg:text-lg" title="AEA">Dr. Emenejildo Jose Antonio Alfredo</h1>
+            </div>
+            <div className="w-40 px-4 bg-overall-900 overflow-hidden rounded-b-3xl lg:w-44 shadow-lg">
+              <h1 className="font-dosis w-full truncate py-1.5 text-center text-white lg:py-2.5 lg:text-lg" title="AEA">Odontologo</h1>
+            </div>
+          </div>  
+        </div>
+        <a href="" className="inline-block mt-5 font-dosis py-2 px-8 rounded-3xl text-lg duration-200 hover:bg-overall-900 hover:text-white" >Ver mas</a>
+      </div>
+      <div className="w-11/12 mx-auto py-8 flex justify-center flex-col items-center lg:flex-row">
+        <div className="w-full lg:w-2/6 flex flex-col items-center lg:items-start">
+          <h1 className="w-full text-2xl sm:text-3xl md:text-4xl font-dosis font-bold text-center lg:text-left">Contáctanos</h1>
+          <div className="h-1 w-16 bg-orange-600 my-3"></div>
+          <p className="font-dosis text-lg text-center px-3 lg:text-left lg:px-0 lg:pr-5">Puedes escribirnos a nuestro Whatsapp con alguna inquietud que tengas o para hacernos llegar tus sugerencias.</p>
+          <a href="https://wa.me/960116321" className="inline-block py-2 px-4 bg-orange-600 my-3 text-white rounded-3xl text-center duration-200 hover:bg-orange-500 hover:scale-95">Contactanos a nuestro Whatsapp</a>
+        </div>
+        <div className="w-11/12 h-80 lg:w-7/12 relative z-0 overflow-hidden rounded-xl mt-5 lg:h-96">
+          <Map/>
+        </div>
+      </div>
+      <Footer/>
     </>
   );
 };
