@@ -4,8 +4,14 @@ import ValidateUser from './components/part/ValidateUser'
 import Signup from './components/private/Signup'
 import Menu from './components/client/Menu'
 import Navbar from './components/part/Navbar'
+import { Carousel, initTE } from "tw-elements";
+import { useEffect } from 'react'
 
 function App() {
+
+  useEffect(() => {
+    initTE({ Carousel }, true ); 
+  },[])
 
   return (
       <BrowserRouter>

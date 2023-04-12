@@ -9,7 +9,10 @@ module.exports = {
     extend: {
       fontFamily: {
         "lobster": ['Lobster', 'cursive'],
-        "dosis": [ 'Dosis',"sans-serif"]
+        "dosis": [ 'Dosis',"sans-serif"],
+        "sans": ["Roboto", "sans-serif"],
+        "body": ["Roboto", "sans-serif"],
+        "mono": ["ui-monospace", "monospace"],
       },
       colors: {
         "overall": {
@@ -18,8 +21,9 @@ module.exports = {
           "800": "#675cff",
           "900": "#574cfb"
         }
-      }
+      },
     },
   },
-  plugins: [require("tw-elements/dist/plugin")],
+  plugins: [require("tw-elements/dist/plugin.cjs")],
+  darkMode: "class"
 }

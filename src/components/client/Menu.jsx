@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import vetWithPetImage from "../../assets/img/vetWithPet.jpg"
 import cats from "../../assets/img/cats.jpg"
 import petClothes from "../../assets/img/petClothes.jpg"
@@ -23,14 +23,128 @@ import veterinaria1 from "../../assets/img/NuestroEquipo/veterinaria2.png"
 import veterinaria2 from "../../assets/img/NuestroEquipo/veterinaria3.png"
 import Map from "../part/Map";
 import Footer from "../part/Footer";
+import { baseURL } from "../libs/baseURL";
 
 const Menu = () => {
+  const [productsVestments, setProductsVestments] = useState([])
+  const [productsCosmetics, setProductsCosmetics] = useState([])
   /* const [user, setUser] = useState({
     nameUser: Cookies.get("name") || "",
     lastnameUser: Cookies.get("lastname") || "",
     email: Cookies.get("email") || "",
     user: Cookies.get("user") || "",
   }); */
+
+  const listProductsCosmetics = async () => {
+    try {
+      const productsList = await baseURL.get("product/findByIdCategory/2")
+      const productLength = productsList.data.data.length
+      let arrayTest = []
+      let list = []
+
+      if (productLength === 0){
+        return;
+      }
+      
+      if (productLength < 4){
+        if (productLength === 3){
+          list = [productsList.data.data[0], productsList.data.data[1], productsList.data.data[2]]
+        } else if (productLength === 2){
+          list = [productsList.data.data[0], productsList.data.data[1]]
+        } else {
+          list = [productsList.data.data[0]]
+        }
+      } else {
+        while (arrayTest.length < 4){
+          let randomNumber = Math.round(Math.random() * (productLength - 1)+1)
+          if (arrayTest.length === 0){
+            arrayTest.push(randomNumber)
+          } else {
+            let position = 0
+            let pass = true;
+            while (position < productLength){
+              if (arrayTest[position] == randomNumber){
+                pass = false
+                break;
+              }
+              position++
+            }
+            if (pass){
+              arrayTest.push(randomNumber)
+            }
+          }
+          console.log(arrayTest);
+        }
+        list = [productsList.data.data[arrayTest[0]-1], productsList.data.data[arrayTest[1]-1], productsList.data.data[arrayTest[2]-1], productsList.data.data[arrayTest[3]-1]]
+      }
+
+      setProductsCosmetics(list)
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const listProductsVestments = async () => {
+    try {
+      const productsList = await baseURL.get("product/findByIdCategory/2")
+      const productLength = productsList.data.data.length
+      let arrayTest = []
+      let list = []
+
+      if (arrayTest.length === 0){
+        return;
+      }
+
+      if (arrayTest.length < 4){
+        if (arrayTest.length === 3){
+          list = [productsList.data.data[0], productsList.data.data[1], productsList.data.data[2]]
+        } else if (arrayTest.length === 2){
+          list = [productsList.data.data[0], productsList.data.data[1]]
+        } else {
+          list = [productsList.data.data[0]]
+        }
+      } else {
+        while (arrayTest.length < 4){
+          let randomNumber = Math.round(Math.random() * (productLength - 1)+1)
+          if (arrayTest.length === 0){
+            arrayTest.push(randomNumber)
+          } else {
+            let position = 0
+            let pass = true;
+            while (position < productLength){
+              if (arrayTest[position] == randomNumber){
+                pass = false
+                break;
+              }
+              position++
+            }
+            if (pass){
+              arrayTest.push(randomNumber)
+            }
+          }
+          console.log(arrayTest);
+        }
+        list = [productsList.data.data[arrayTest[0]-1], productsList.data.data[arrayTest[1]-1], productsList.data.data[arrayTest[2]-1], productsList.data.data[arrayTest[3]-1]]
+      }
+
+      setProductsVestments(list)
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    listProductsCosmetics()
+    listProductsVestments()
+  },[])
+
+  useEffect(() => {
+    console.log(productsCosmetics);
+    console.log(productsVestments);
+  }, [productsCosmetics, productsVestments])
+
   return (
     <>
       {/* El Carousel */}
@@ -282,17 +396,21 @@ const Menu = () => {
             <Link className="font-dosis py-2 px-8 rounded-2xl bg-overall-600 text-white duration-200 hover:scale-105" href="">Ver más</Link>
           </div>
           <div className="w-full flex justify-center flex-wrap gap-y-5 gap-x-3 py-4 xl:gap-x-8">
-            <div className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
-              <div className="w-[80%] h-24 md:h-36 lg:h-44 xl:h-48 rounded-md overflow-hidden relative">
-                <img src={cosmeticoDog1} alt="Vestimenta" className="w-full h-full object-cover" />
-              </div>
-              <div className="w-[80%] overflow-hidden relative">
-                <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl">Ropa decorativa</h1>
-                <h1 className="font-dosis w-full truncate xl:text-xl">S/ 12.00</h1>
-                <a href="#" className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</a>
-              </div>
-            </div>
-            <div className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
+            {
+              productsCosmetics.map(p => (
+                <div key={p.idProducto} className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
+                  <div className="w-[80%] h-24 md:h-36 lg:h-44 xl:h-48 rounded-md overflow-hidden relative">
+                    <img src={p.imagenProducto} alt="Vestimenta" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="w-[80%] overflow-hidden relative">
+                    <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl">{p.nombreProducto}</h1>
+                    <h1 className="font-dosis w-full truncate xl:text-xl">{"S/ "+p.precioProducto}</h1>
+                    <Link to={"/product/"+p.idProducto} className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</Link>
+                  </div>
+                </div>
+              ))
+            }
+            {/* <div className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
               <div className="w-[80%] h-24 md:h-36 lg:h-44 xl:h-48 rounded-md overflow-hidden relative">
                 <img src={cosmeticoCat1} alt="Vestimenta" className="w-full h-full object-cover" />
               </div>
@@ -321,7 +439,7 @@ const Menu = () => {
                 <h1 className="font-dosis w-full truncate xl:text-xl">S/ 12.00</h1>
                 <a href="#" className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</a>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -366,7 +484,7 @@ const Menu = () => {
         </div>
         <a href="" className="inline-block mt-5 font-dosis py-2 px-8 rounded-3xl text-lg duration-200 hover:bg-overall-900 hover:text-white" >Ver mas</a>
       </div>
-      <div className="w-11/12 mx-auto py-8 flex justify-center flex-col items-center lg:flex-row">
+      <div className="w-11/12 mx-auto pt-8 pb-14 flex justify-center flex-col items-center lg:flex-row">
         <div className="w-full lg:w-2/6 flex flex-col items-center lg:items-start">
           <h1 className="w-full text-2xl sm:text-3xl md:text-4xl font-dosis font-bold text-center lg:text-left">Contáctanos</h1>
           <div className="h-1 w-16 bg-orange-600 my-3"></div>
