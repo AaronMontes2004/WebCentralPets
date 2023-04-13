@@ -140,11 +140,6 @@ const Menu = () => {
     listProductsVestments()
   },[])
 
-  useEffect(() => {
-    console.log(productsCosmetics);
-    console.log(productsVestments);
-  }, [productsCosmetics, productsVestments])
-
   return (
     <>
       {/* El Carousel */}

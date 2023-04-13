@@ -18,10 +18,13 @@ const GeneralStatus = ({children}) => {
     token: Cookies.get("token") || "",
     id: Cookies.get("id") || "",
     role: Cookies.get("role") || ""
-})
+  })
+
+  const [categoryId, setCategoryId] = useState(0)
+  const [listQuantity, setListQuantity] = useState(1)
 
   return (
-    <GeneralContext.Provider value={{on, setOn, status, setStatus, message, setMessage, user, setUser}}>
+    <GeneralContext.Provider value={{on, setOn, status, setStatus, message, setMessage, user, setUser, categoryId, setCategoryId, listQuantity, setListQuantity}}>
         {children}
     </GeneralContext.Provider>
   )
