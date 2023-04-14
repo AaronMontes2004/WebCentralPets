@@ -29,7 +29,7 @@ import { GeneralContext } from "../context/GeneralStatus";
 const Menu = () => {
   const [productsVestments, setProductsVestments] = useState([])
   const [productsCosmetics, setProductsCosmetics] = useState([])
-  const { setCategoryId } = useContext(GeneralContext)
+  const { setCategoryId, setIconStatus } = useContext(GeneralContext)
   /* const [user, setUser] = useState({
     nameUser: Cookies.get("name") || "",
     lastnameUser: Cookies.get("lastname") || "",
@@ -140,6 +140,7 @@ const Menu = () => {
   useEffect(() => {
     listProductsCosmetics()
     listProductsVestments()
+    setIconStatus(true)
   },[])
 
   return (
@@ -486,7 +487,7 @@ const Menu = () => {
           <h1 className="w-full text-2xl sm:text-3xl md:text-4xl font-dosis font-bold text-center lg:text-left">Contáctanos</h1>
           <div className="h-1 w-16 bg-orange-600 my-3"></div>
           <p className="font-dosis text-lg text-center px-3 lg:text-left lg:px-0 lg:pr-5">Puedes escribirnos a nuestro Whatsapp con alguna inquietud que tengas o para hacernos llegar tus sugerencias.</p>
-          <a href="https://wa.me/960116321" className="inline-block py-2 px-4 bg-orange-600 my-3 text-white rounded-3xl text-center duration-200 hover:bg-orange-500 hover:scale-95">Contactanos a nuestro Whatsapp</a>
+          <a href="https://wa.me/981558109" className="inline-block py-2 px-4 bg-orange-600 my-3 text-white rounded-3xl text-center duration-200 hover:bg-orange-500 hover:scale-95" target="_blank">Contactanos a nuestro Whatsapp</a>
         </div>
         <div className="w-11/12 h-80 lg:w-7/12 relative z-0 overflow-hidden rounded-xl mt-5 lg:h-96">
           <Map/>

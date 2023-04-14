@@ -4,10 +4,11 @@ import { baseURL } from '../libs/baseURL'
 import arrowIcon from "../../assets/icons/arrowBlack.svg"
 import { GeneralContext } from '../context/GeneralStatus'
 import ListProducts from './ListProducts'
+import Footer from '../part/Footer'
 
 const ProductInquiry = () => {
 
-    const { categoryId, setCategoryId } = useContext(GeneralContext)
+    const { categoryId, setCategoryId, setIconStatus } = useContext(GeneralContext)
     
     const [categoryName, setCategoryName] = useState("")
     const [categories, setCategories] = useState([])
@@ -24,6 +25,7 @@ const ProductInquiry = () => {
 
     useEffect(() => {
         listCategories()
+        setIconStatus(true)
     }, [])
 
     useEffect(() => {
@@ -31,6 +33,8 @@ const ProductInquiry = () => {
     }, [categoryId])
 
   return (
+    <>
+    
     <div className='w-11/12 mx-auto relative flex flex-col justify-evenly my-10'>
         <div className='w-full flex justify-between'>
             <div className='w-44 h-12 border-b-[1px] flex flex-col relative md:h-14 lg:h-16 lg:w-52'>
@@ -51,6 +55,8 @@ const ProductInquiry = () => {
         </div>
         <ListProducts/>
     </div>
+    <Footer/>
+    </>
   )
 }
 

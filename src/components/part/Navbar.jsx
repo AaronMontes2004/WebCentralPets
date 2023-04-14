@@ -20,7 +20,7 @@ const Navbar = () => {
   const [permission, setPermission] = useState(true)
   const [checkedUser, setCheckedUser] = useState(false)
   const [openShoppingCart, setOpenShoppingCart] = useState(false)
-  const {precioTotal} = useContext(GeneralContext)
+  const {precioTotal, iconStatus} = useContext(GeneralContext)
 
   const [user, setUser] = useState({
     nameUser: Cookies.get("name") || "",
@@ -92,8 +92,8 @@ const Navbar = () => {
                 <span className='text-lg font-dosis text-white hidden px-1 xl:inline-block duration-200'>Productos</span>
               </div>
             </button>
-            <button className='relative text-center justify-center items-center w-auto hidden md:flex z-40'>
-              <div className='relative text-center justify-center items-center w-auto duration-200 hover:scale-105 hidden md:flex z-40'>
+            <button className='relative text-center justify-center items-center w-auto hidden md:flex z-40 cursor-default'>
+              <div className='relative text-center justify-center items-center w-auto duration-200 hover:scale-105 hidden md:flex z-40 cursor-pointer'>
                 <div className='relative' onClick={() => {/* navigate("/carrito-compras") */ setOpenShoppingCart(!openShoppingCart)}}>
                   <img src={shoppingCartIcon} alt="Carrito de compras" className='w-8 h-8'/>
                 </div>
@@ -106,7 +106,7 @@ const Navbar = () => {
                   <p className='font-dosis text-base'>{"S/ "+precioTotal.toFixed(2)}</p>
                 </div>
                 <div className='flex justify-center'>
-                  <a className='bg-orange-600 rounded-xl text-white py-3 px-10 mb-3 duration-150 hover:bg-orange-500 hover:scale-95'>Realizar pedido</a>
+                  <Link to={"/realizar-compra"} className='bg-orange-600 rounded-xl text-white py-3 px-10 mb-3 duration-150 hover:bg-orange-500 hover:scale-95 cursor-pointer' onClick={() => {setOpenShoppingCart(false)}}>Realizar pedido</Link>
                 </div>
               </div>
             </button>
@@ -126,12 +126,12 @@ const Navbar = () => {
             </button>
           </div>  
         </nav>
-        <div className='fixed bottom-5 left-5 md:hidden rounded-full overflow-hidden cursor-pointer animate-bounce hover:animate-none hover:shadow-sm z-20'>
+        <div className={'bottom-5 left-5 md:hidden rounded-full overflow-hidden cursor-pointer animate-bounce hover:animate-none hover:shadow-sm z-20 '+(iconStatus ? "fixed" : "hidden" )}>
           <div className='bg-overall-900 w-12 h-12'>
             <img src={shoppingBagIcon} alt="Mi carrito" className='w-full h-full scale-[0.6]'/>
           </div>
         </div>
-        <div className='fixed bottom-5 right-5 md:hidden rounded-full overflow-hidden cursor-pointer animate-bounce hover:animate-none hover:shadow-sm z-20'>
+        <div className={'bottom-5 right-5 md:hidden rounded-full overflow-hidden cursor-pointer animate-bounce hover:animate-none hover:shadow-sm z-20 '+(iconStatus ? "fixed" : "hidden" )}>
           <div className='bg-orange-600 w-12 h-12'>
             <img src={shoppingCartIcon} alt="Mi carrito" className='w-full h-full scale-[0.6]'/>
           </div>

@@ -1,9 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { GeneralContext } from '../context/GeneralStatus'
 import trash from "../../assets/icons/trash.png"
 
 const ShoppingCart = () => {
-  const {productTable, removeProductFromLocalStorage} = useContext(GeneralContext)
+  const {productTable, removeProductFromLocalStorage, setIconStatus} = useContext(GeneralContext)
+  useEffect(() => {
+    setIconStatus(true)
+  }, [])
   return (
     productTable && productTable.length > 0 ? (<>
       {productTable?.map((p, i) => (

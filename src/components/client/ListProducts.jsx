@@ -4,12 +4,13 @@ import arrowLeft from "../../assets/icons/arrowLeft.svg"
 import arrowRight from "../../assets/icons/arrowRight.svg"
 import { baseURL } from '../libs/baseURL'
 import { Link } from 'react-router-dom'
+import Footer from '../part/Footer'
 
 const ListProducts = () => {
 
   const [products, setProducts] = useState([])
   const [index, setIndex] = useState(0)
-  const { listQuantity, setListQuantity, categoryId, addProductToLocalStorage } = useContext(GeneralContext)
+  const { listQuantity, setListQuantity, categoryId, addProductToLocalStorage, setIconStatus } = useContext(GeneralContext)
   const [array, setArray] = useState([])
 
   const listProducts = async () => {
@@ -47,6 +48,10 @@ const ListProducts = () => {
     listProducts()
   },[listQuantity, categoryId])
 
+  useEffect(() => {
+    setIconStatus(true)
+  })
+
   return (
     <>
       <div className='my-5 w-full flex justify-center'>
@@ -74,6 +79,15 @@ const ListProducts = () => {
                 </div>
               ))
             }
+      </div>
+      <div className='my-5 w-full flex justify-center'>
+        <div className='flex gap-1 items-center justify-center lg:gap-2'>
+          <img src={arrowLeft} alt="Arrow Left" className={'w-4 h-4 object-cover lg:w-5 lg:h-5 '+(listQuantity == 1 ? "opacity-50" : "opacity-100 hover:cursor-pointer")} onClick={listQuantity == 1 ? ()=>{}: () => {setListQuantity(listQuantity-1)}}/>
+          {
+            array.map(n => ((<button key={n} className={'rounded-full w-6 h-6 text-sm duration-100 hover:bg-sky-500 hover:text-white lg:w-8 lg:h-8 lg:text-base '+(n == listQuantity ? "bg-sky-500 text-white" : "bg-white")} onClick={() => {setListQuantity(n)}}>{n}</button>)))
+          }
+          <img src={arrowRight} alt="Arrow Right" className={'w-4 h-4 object-cover lg:w-5 lg:h-5 '+(listQuantity == index ? "opacity-50" : "opacity-100 hover:cursor-pointer")} onClick={listQuantity == index ? ()=>{}: () => {setListQuantity(listQuantity+1)}} />
+        </div>
       </div>
     </>
   )

@@ -25,6 +25,7 @@ const GeneralStatus = ({children}) => {
   const [productTable, setProductTable] = useState([])
   const [productChanges, setProductChanges] = useState(true)
   const [precioTotal, setPrecioTotal] = useState(0)
+  const [iconStatus, setIconStatus] = useState(true)
 
   const addProductToLocalStorage = async (p) => {
     const productsShoppingCart = localStorage.getItem("shoppingCart")
@@ -57,7 +58,7 @@ const GeneralStatus = ({children}) => {
   }, [productChanges])
 
   return (
-    <GeneralContext.Provider value={{on, setOn, status, setStatus, message, setMessage, user, setUser, categoryId, setCategoryId, listQuantity, setListQuantity, addProductToLocalStorage, removeProductFromLocalStorage, productTable, precioTotal}}>
+    <GeneralContext.Provider value={{on, setOn, status, setStatus, message, setMessage, user, setUser, categoryId, setCategoryId, listQuantity, setListQuantity, addProductToLocalStorage, removeProductFromLocalStorage, productTable, precioTotal, iconStatus, setIconStatus}}>
         {children}
     </GeneralContext.Provider>
   )
