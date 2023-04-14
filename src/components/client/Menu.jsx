@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import vetWithPetImage from "../../assets/img/vetWithPet.jpg"
 import cats from "../../assets/img/cats.jpg"
 import petClothes from "../../assets/img/petClothes.jpg"
@@ -24,10 +24,12 @@ import veterinaria2 from "../../assets/img/NuestroEquipo/veterinaria3.png"
 import Map from "../part/Map";
 import Footer from "../part/Footer";
 import { baseURL } from "../libs/baseURL";
+import { GeneralContext } from "../context/GeneralStatus";
 
 const Menu = () => {
   const [productsVestments, setProductsVestments] = useState([])
   const [productsCosmetics, setProductsCosmetics] = useState([])
+  const { setCategoryId } = useContext(GeneralContext)
   /* const [user, setUser] = useState({
     nameUser: Cookies.get("name") || "",
     lastnameUser: Cookies.get("lastname") || "",
@@ -400,7 +402,7 @@ const Menu = () => {
                   <div className="w-[80%] overflow-hidden relative">
                     <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl">{p.nombreProducto}</h1>
                     <h1 className="font-dosis w-full truncate xl:text-xl">{"S/ "+p.precioProducto}</h1>
-                    <Link to={"/product/"+p.idProducto} className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</Link>
+                    <Link to={"/consulta-producto"} className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</Link>
                   </div>
                 </div>
               ))

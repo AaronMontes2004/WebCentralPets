@@ -9,7 +9,7 @@ const ListProducts = () => {
 
   const [products, setProducts] = useState([])
   const [index, setIndex] = useState(0)
-  const { listQuantity, setListQuantity, categoryId, setCategoryId } = useContext(GeneralContext)
+  const { listQuantity, setListQuantity, categoryId, addProductToLocalStorage } = useContext(GeneralContext)
   const [array, setArray] = useState([])
 
   const listProducts = async () => {
@@ -24,16 +24,13 @@ const ListProducts = () => {
 
   const operation = async (data) => {
     const listQuantityTest = [...data, ...data, ...data].length;
-    console.log(listQuantityTest);
     let quantity = Math.ceil(listQuantityTest/10);
-    console.log(quantity);
     setIndex(quantity)
     let indice = listQuantity * 10
 
     let list = [...data, ...data, ...data]
 
     const newResponse = list.slice(indice - 10, indice )
-    console.log(newResponse.length);
 
     let n = 1;
     let a = []
@@ -53,12 +50,12 @@ const ListProducts = () => {
   return (
     <>
       <div className='my-5 w-full flex justify-center'>
-        <div className='flex gap-1 items-center justify-center'>
-          <a href=""><img src={arrowLeft} alt="" className='w-4 h-4 object-cover' /></a>
+        <div className='flex gap-1 items-center justify-center lg:gap-2'>
+          <img src={arrowLeft} alt="Arrow Left" className={'w-4 h-4 object-cover lg:w-5 lg:h-5 '+(listQuantity == 1 ? "opacity-50" : "opacity-100 hover:cursor-pointer")} onClick={listQuantity == 1 ? ()=>{}: () => {setListQuantity(listQuantity-1)}}/>
           {
-            array.map(n => ((<button key={n} className={'rounded-full w-6 h-6 text-sm duration-100 hover:bg-sky-500 hover:text-white '+(n == listQuantity ? "bg-sky-500 text-white" : "bg-white")} onClick={() => {setListQuantity(n)}}>{n}</button>)))
+            array.map(n => ((<button key={n} className={'rounded-full w-6 h-6 text-sm duration-100 hover:bg-sky-500 hover:text-white lg:w-8 lg:h-8 lg:text-base '+(n == listQuantity ? "bg-sky-500 text-white" : "bg-white")} onClick={() => {setListQuantity(n)}}>{n}</button>)))
           }
-          <a href=""><img src={arrowRight} alt="" className='w-4 h-4 object-cover' /></a>
+          <img src={arrowRight} alt="Arrow Right" className={'w-4 h-4 object-cover lg:w-5 lg:h-5 '+(listQuantity == index ? "opacity-50" : "opacity-100 hover:cursor-pointer")} onClick={listQuantity == index ? ()=>{}: () => {setListQuantity(listQuantity+1)}} />
         </div>
       </div>
       <div className="w-full flex justify-center flex-wrap gap-y-5 gap-x-3 py-4 xl:gap-x-8">
@@ -69,9 +66,10 @@ const ListProducts = () => {
                     <img src={p.imagenProducto} alt="Vestimenta" className="w-full h-full object-cover" />
                   </div>
                   <div className="w-[80%] overflow-hidden relative">
-                    <h1 className="font-dosis text-sm font-bold w-full truncate my-1 xl:text-xl">{p.nombreProducto}</h1>
-                    <h1 className="font-dosis text-sm w-full truncate xl:text-xl">{"S/ "+p.precioProducto}</h1>
-                    <Link to={"/product/"+p.idProducto} className="px-2 text-[11px] w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 md:truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Agregar al carrito</Link>
+                    <h1 className="font-dosis text-sm font-bold w-full truncate my-1 xl:text-xl md:text-base lg:text-lg">{p.nombreProducto}</h1>
+                    <h1 className="font-dosis text-sm w-full truncate xl:text-xl md:text-base lg:text-lg">{"S/ "+p.precioProducto}</h1>
+                    <Link to={"/product/"+p.idProducto} className="px-2 text-[11px] w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-overall-900 md:truncate xl:text-lg duration-200 hover:bg-overall-800 hover:scale-95 md:text-base lg:text-lg">Ver detalles</Link>
+                    <Link onClick={() => addProductToLocalStorage(p)} className="px-2 text-[11px] w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 md:truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95 md:text-base lg:text-lg hover:cursor-pointer">Agregar al carrito</Link>
                   </div>
                 </div>
               ))

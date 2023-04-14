@@ -8,6 +8,7 @@ import { Carousel, initTE } from "tw-elements";
 import { useEffect } from 'react'
 import ProductInquiry from './components/client/ProductInquiry'
 import ListProducts from './components/client/ListProducts'
+import ShoppingCart from './components/client/ShoppingCart'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
           <Route path='/signup' element={<Signup/>}/>
           <Route element={<Navbar/>}>
             <Route path='/' element={<Menu/>}/>
+            <Route path='/carrito-compras' element={<ShoppingCart/>}/>
             <Route element={<ProductInquiry/>}>
               <Route path='/consulta-producto' element={<ListProducts/>} />
             </Route>

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Navigate, Outlet, useNavigate } from 'react-router-dom'
 import petsIcon from "../../assets/icons/Pets.png"
 import userIcon from "../../assets/icons/user.svg"
 import arrowIcon from "../../assets/icons/arrow.svg"
@@ -10,11 +10,16 @@ import shoppingBagIcon from "../../assets/icons/shopping-bag.svg"
 import keyIcon from "../../assets/icons/key.svg"
 import Cookies from 'js-cookie'
 import { baseURL } from '../libs/baseURL'
+import ShoppingCart from '../client/ShoppingCart'
+import { GeneralContext } from '../context/GeneralStatus'
 
 const Navbar = () => {
 
   const [permission, setPermission] = useState(true)
   const [checkedUser, setCheckedUser] = useState(false)
+  const [openShoppingCart, setOpenShoppingCart] = useState(false)
+  const {precioTotal} = useContext(GeneralContext)
+
   const [user, setUser] = useState({
     nameUser: Cookies.get("name") || "",
     lastnameUser: Cookies.get("lastname") || "",
@@ -61,7 +66,7 @@ const Navbar = () => {
 
   return (
     <>
-        <div className={'absolute w-full h-screen duration-150 z-30 '+(checkedUser ? "bg-gray-500/10 pointer-events-auto" : "bg-gray-500/0 pointer-events-none")} onClick={()=>setCheckedUser(false)}>
+        <div className={'absolute w-full h-screen duration-150 z-30 '+(checkedUser || openShoppingCart ? "bg-gray-500/10 pointer-events-auto" : "bg-gray-500/0 pointer-events-none")} onClick={()=>{setCheckedUser(false), setOpenShoppingCart(false)}}>
         </div>
         <nav className='w-full bg-overall-600 flex justify-around z-20'>
           <div className='flex justify-center items-center gap-2 py-4 px-2'>
@@ -83,15 +88,27 @@ const Navbar = () => {
               <img src={shoppingBagIcon} alt="Carrito de compras" className='w-8 h-8 duration-200 '/>
               <span className='text-lg font-dosis text-white hidden px-1 xl:inline-block duration-200'>Mis compras</span>
             </button>
-            <button className='text-center justify-center items-center w-auto duration-200 hover:scale-105 hidden md:flex' onClick={() => {console.log("Mi carrito");}}>
-              <img src={shoppingCartIcon} alt="Carrito de compras" className='w-8 h-8'/>
-              <span className='text-lg font-dosis text-white hidden px-1 xl:inline-block'>Mi carrito</span>
+            <button className='relative text-center justify-center items-center w-auto duration-200 hover:scale-105 hidden md:flex z-40'>
+              <div className='relative' onClick={() => {/* navigate("/carrito-compras") */ setOpenShoppingCart(!openShoppingCart)}}>
+                <img src={shoppingCartIcon} alt="Carrito de compras" className='w-8 h-8'/>
+              </div>
+              <span onClick={() => {/* navigate("/carrito-compras") */ setOpenShoppingCart(!openShoppingCart)}} className='text-lg font-dosis text-white hidden px-1 xl:inline-block'>Mi carrito</span>
+              <div className={'absolute max-h-[21rem] shadow-md w-96 duration-300 top-full bg-white flex flex-col translate-y-3 translate-x-2 right-0 rounded-lg items-center gap-4 overflow-hidden '+(openShoppingCart ? "h-auto overflow-y-auto py-4" : "h-0")}>
+                <ShoppingCart/>
+                <div className='w-11/12 border-[1px] px-10 border-t-black flex pt-4 pb-2 justify-between'>
+                  <p className='font-dosis text-base font-bold'>Precio total:</p>
+                  <p className='font-dosis text-base'>{"S/ "+precioTotal.toFixed(2)}</p>
+                </div>
+                <div className='flex justify-center'>
+                  <a className='bg-orange-600 rounded-xl text-white py-3 px-10 mb-3 duration-150 hover:bg-orange-500 hover:scale-95'>Realizar pedido</a>
+                </div>
+              </div>
             </button>
             <button className='text-center flex justify-center items-center w-auto duration-200 hover:scale-105 relative z-40' onClick={() => setCheckedUser(!checkedUser)} >
               <img src={userIcon} alt="Usuario" className='w-8 h-8' />
               <span className='text-lg font-dosis text-white hidden px-1 text-ellipsis overflow-hidden w-auto max-w-[180px] sm:inline-block'>{user.user || "Iniciar Sesión"}</span>
               <img src={arrowIcon} alt="Arrow" className={'w-4 h-4 duration-500 '+(checkedUser ? "-rotate-0" : "-rotate-90")} />
-              <div className={'absolute w-32 sm:w-full duration-300 top-full bg-white flex flex-col translate-y-3 translate-x-2 min-w-[120px] max-w-[180px] right-0 rounded-lg '+(checkedUser ? "h-[73px]" : "h-0")}>
+              <div className={'absolute shadow-md w-32 sm:w-full duration-300 top-full bg-white flex flex-col translate-y-3 translate-x-2 min-w-[120px] max-w-[180px] right-0 rounded-lg '+(checkedUser ? "h-[73px]" : "h-0")}>
                 <img src={arrowCloseIcon} alt="Arrow" className={'w-auto duration-300 top-0 right-0 absolute -translate-y-[63%] '+(checkedUser ? 'h-8' : 'h-0')}/>
                 <div className='w-full h-full flex flex-col overflow-hidden rounded-lg'>
                   <Link className={'py-1.5 hover:bg-gray-300 font-dosis '+(user.user ? 'block' : 'hidden')}>Mi cuenta</Link>
