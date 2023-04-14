@@ -15,6 +15,8 @@ import { GeneralContext } from '../context/GeneralStatus'
 
 const Navbar = () => {
 
+  const navigate = useNavigate()
+
   const [permission, setPermission] = useState(true)
   const [checkedUser, setCheckedUser] = useState(false)
   const [openShoppingCart, setOpenShoppingCart] = useState(false)
@@ -84,10 +86,10 @@ const Navbar = () => {
             </div>
           </div>
           <div className='flex justify-center items-center py-4 px-2 gap-8'>
-            <button className='text-center justify-center items-center w-auto hidden md:flex' onClick={() => {console.log("Mis compras");}}>
+            <button className='text-center justify-center items-center w-auto hidden md:flex' onClick={() => {navigate("/consulta-producto")}}>
               <div className='text-center justify-center items-center w-auto duration-200 hover:scale-105 hidden md:flex' >
                 <img src={shoppingBagIcon} alt="Carrito de compras" className='w-8 h-8 duration-200 '/>
-                <span className='text-lg font-dosis text-white hidden px-1 xl:inline-block duration-200'>Mis compras</span>
+                <span className='text-lg font-dosis text-white hidden px-1 xl:inline-block duration-200'>Productos</span>
               </div>
             </button>
             <button className='relative text-center justify-center items-center w-auto hidden md:flex z-40'>
