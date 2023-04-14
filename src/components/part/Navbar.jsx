@@ -66,7 +66,7 @@ const Navbar = () => {
 
   return (
     <>
-        <div className={'absolute w-full h-screen duration-150 z-30 '+(checkedUser || openShoppingCart ? "bg-gray-500/10 pointer-events-auto" : "bg-gray-500/0 pointer-events-none")} onClick={()=>{setCheckedUser(false), setOpenShoppingCart(false)}}>
+        <div className={'fixed w-full h-full duration-150 z-30 '+(checkedUser || openShoppingCart ? "bg-gray-500/10 pointer-events-auto" : "bg-gray-500/0 pointer-events-none")} onClick={()=>{setCheckedUser(false), setOpenShoppingCart(false)}}>
         </div>
         <nav className='w-full bg-overall-600 flex justify-around z-20'>
           <div className='flex justify-center items-center gap-2 py-4 px-2'>
@@ -84,16 +84,20 @@ const Navbar = () => {
             </div>
           </div>
           <div className='flex justify-center items-center py-4 px-2 gap-8'>
-            <button className='text-center justify-center items-center w-auto duration-200 hover:scale-105 hidden md:flex' onClick={() => {console.log("Mis compras");}}>
-              <img src={shoppingBagIcon} alt="Carrito de compras" className='w-8 h-8 duration-200 '/>
-              <span className='text-lg font-dosis text-white hidden px-1 xl:inline-block duration-200'>Mis compras</span>
-            </button>
-            <button className='relative text-center justify-center items-center w-auto duration-200 hover:scale-105 hidden md:flex z-40'>
-              <div className='relative' onClick={() => {/* navigate("/carrito-compras") */ setOpenShoppingCart(!openShoppingCart)}}>
-                <img src={shoppingCartIcon} alt="Carrito de compras" className='w-8 h-8'/>
+            <button className='text-center justify-center items-center w-auto hidden md:flex' onClick={() => {console.log("Mis compras");}}>
+              <div className='text-center justify-center items-center w-auto duration-200 hover:scale-105 hidden md:flex' >
+                <img src={shoppingBagIcon} alt="Carrito de compras" className='w-8 h-8 duration-200 '/>
+                <span className='text-lg font-dosis text-white hidden px-1 xl:inline-block duration-200'>Mis compras</span>
               </div>
-              <span onClick={() => {/* navigate("/carrito-compras") */ setOpenShoppingCart(!openShoppingCart)}} className='text-lg font-dosis text-white hidden px-1 xl:inline-block'>Mi carrito</span>
-              <div className={'absolute max-h-[21rem] shadow-md w-96 duration-300 top-full bg-white flex flex-col translate-y-3 translate-x-2 right-0 rounded-lg items-center gap-4 overflow-hidden '+(openShoppingCart ? "h-auto overflow-y-auto py-4" : "h-0")}>
+            </button>
+            <button className='relative text-center justify-center items-center w-auto hidden md:flex z-40'>
+              <div className='relative text-center justify-center items-center w-auto duration-200 hover:scale-105 hidden md:flex z-40'>
+                <div className='relative' onClick={() => {/* navigate("/carrito-compras") */ setOpenShoppingCart(!openShoppingCart)}}>
+                  <img src={shoppingCartIcon} alt="Carrito de compras" className='w-8 h-8'/>
+                </div>
+                <span onClick={() => {/* navigate("/carrito-compras") */ setOpenShoppingCart(!openShoppingCart)}} className='text-lg font-dosis text-white hidden px-1 xl:inline-block'>Mi carrito</span>
+              </div>
+              <div className={'absolute max-h-[21rem] shadow-md w-96 duration-300 top-full bg-white flex flex-col translate-y-3 translate-x-2 right-0 rounded-lg items-center gap-4 overflow-hidden z-40 modify-scroll '+(openShoppingCart ? "h-auto overflow-y-auto py-4 clip-circle-on" : "clip-circle-off")}>
                 <ShoppingCart/>
                 <div className='w-11/12 border-[1px] px-10 border-t-black flex pt-4 pb-2 justify-between'>
                   <p className='font-dosis text-base font-bold'>Precio total:</p>

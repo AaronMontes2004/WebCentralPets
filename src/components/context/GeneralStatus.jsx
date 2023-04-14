@@ -50,7 +50,7 @@ const GeneralStatus = ({children}) => {
   useEffect(() => {
     setProductTable(JSON.parse(localStorage.getItem("shoppingCart")))
     let a = 0;
-    JSON.parse(localStorage.getItem("shoppingCart")).map(p => {
+    JSON.parse(localStorage.getItem("shoppingCart"))?.map(p => {
       a+=Number(p.precioProducto)
     })
     setPrecioTotal(Math.round(a*100)/100)
