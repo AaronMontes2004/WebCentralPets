@@ -34,7 +34,6 @@ const ProductInquiry = () => {
 
   return (
     <>
-    
     <div className='w-11/12 mx-auto relative flex flex-col justify-evenly my-10'>
         <div className='w-full flex justify-between'>
             <div className='w-44 h-12 border-b-[1px] flex flex-col relative md:h-14 lg:h-16 lg:w-52'>

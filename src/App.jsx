@@ -8,8 +8,9 @@ import { Carousel, initTE } from "tw-elements";
 import { useEffect } from 'react'
 import ProductInquiry from './components/client/ProductInquiry'
 import ListProducts from './components/client/ListProducts'
-import ShoppingCart from './components/client/ShoppingCart'
 import MakeAPurchase from './components/client/MakeAPurchase'
+import PayProduct from './components/client/PayProduct'
+import ErrorElement from './components/libs/ErrorElement'
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
             </Route>
             <Route path='/realizar-compra' element={<MakeAPurchase/>}/>
           </Route>
+          <Route path='/realizar-pago' element={<PayProduct/>} errorElement={<ErrorElement/>}/>
         </Routes>
       </BrowserRouter>
   )

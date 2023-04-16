@@ -26,16 +26,18 @@ const GeneralStatus = ({children}) => {
   const [productChanges, setProductChanges] = useState(true)
   const [precioTotal, setPrecioTotal] = useState(0)
   const [iconStatus, setIconStatus] = useState(true)
+  const [totalProductos, setTotalProductos] = useState(0)
+  const [totalPagar, setTotalPagar] = useState(0)
 
   const addProductToLocalStorage = async (p) => {
     const productsShoppingCart = localStorage.getItem("shoppingCart")
     if (!productsShoppingCart){
-      localStorage.setItem("shoppingCart", JSON.stringify([...[p]]))
+      localStorage.setItem("shoppingCart", JSON.stringify([...[{...p, ["cantidadTotal"]: 1, ["precioTotalProducto"]: p.precioProducto}]]))
       setProductChanges(!productChanges)
     } else {   
       let value = JSON.parse(productsShoppingCart).filter(s => s.idProducto == p.idProducto)
       if (!value || value.length === 0){
-        localStorage.setItem("shoppingCart", JSON.stringify([...JSON.parse(productsShoppingCart), ...[p]]))
+        localStorage.setItem("shoppingCart", JSON.stringify([...JSON.parse(productsShoppingCart), ...[{...p, ["cantidadTotal"]: 1, ["precioTotalProducto"]: p.precioProducto}]]))
         setProductChanges(!productChanges)
       }
     }
@@ -47,18 +49,44 @@ const GeneralStatus = ({children}) => {
     localStorage.setItem("shoppingCart", JSON.stringify([...newTable]))
     setProductChanges(!productChanges)
   }
+
+  const addAmount = (p) => {
+    let data = JSON.parse(localStorage.getItem("shoppingCart"));
+    let indexData = data.findIndex(d => d.idProducto == p.idProducto)
+    data[indexData].cantidadTotal += 1;
+    data[indexData].precioTotalProducto = data[indexData].precioProducto * data[indexData].cantidadTotal
+    localStorage.setItem("shoppingCart", JSON.stringify([...data]))
+    setProductChanges(!productChanges)
+  }
+
+  const subtractAmount = (p) => {
+    let data = JSON.parse(localStorage.getItem("shoppingCart"));
+    let indexData = data.findIndex(d => d.idProducto == p.idProducto)
+    data[indexData].cantidadTotal -= 1;
+    data[indexData].precioTotalProducto = data[indexData].precioProducto * data[indexData].cantidadTotal
+    localStorage.setItem("shoppingCart", JSON.stringify([...data]))
+    setProductChanges(!productChanges)
+  } 
   
   useEffect(() => {
-    setProductTable(JSON.parse(localStorage.getItem("shoppingCart")))
+    setProductTable(JSON.parse(localStorage.getItem("shoppingCart") || "[]"))
     let a = 0;
-    JSON.parse(localStorage.getItem("shoppingCart"))?.map(p => {
+    JSON.parse(localStorage.getItem("shoppingCart") || "[]") ?.map(p => {
       a+=Number(p.precioProducto)
     })
     setPrecioTotal(Math.round(a*100)/100)
+    let b = 0;
+    let c = 0;
+    JSON.parse(localStorage.getItem("shoppingCart") || "[]") ?.map(p => {
+      b+=Number(p.cantidadTotal)
+      c+=Number(p.precioTotalProducto)
+    })
+    setTotalProductos(b)
+    setTotalPagar(c)
   }, [productChanges])
 
   return (
-    <GeneralContext.Provider value={{on, setOn, status, setStatus, message, setMessage, user, setUser, categoryId, setCategoryId, listQuantity, setListQuantity, addProductToLocalStorage, removeProductFromLocalStorage, productTable, precioTotal, iconStatus, setIconStatus}}>
+    <GeneralContext.Provider value={{on, setOn, status, setStatus, message, setMessage, user, setUser, categoryId, setCategoryId, listQuantity, setListQuantity, addProductToLocalStorage, removeProductFromLocalStorage, productTable, precioTotal, iconStatus, setIconStatus, addAmount, subtractAmount, totalProductos, totalPagar}}>
         {children}
     </GeneralContext.Provider>
   )
