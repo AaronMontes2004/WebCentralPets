@@ -11,6 +11,7 @@ import ListProducts from './components/client/ListProducts'
 import MakeAPurchase from './components/client/MakeAPurchase'
 import PayProduct from './components/client/PayProduct'
 import ErrorElement from './components/libs/ErrorElement'
+import ConfirmPayment from './components/client/ConfirmPayment'
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
             <Route path='/realizar-compra' element={<MakeAPurchase/>}/>
           </Route>
           <Route path='/realizar-pago' element={<PayProduct/>} errorElement={<ErrorElement/>}/>
+          <Route path='/confirmar-pago' element={<ConfirmPayment/>} />
         </Routes>
       </BrowserRouter>
   )

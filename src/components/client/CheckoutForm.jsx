@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   PaymentElement,
   LinkAuthenticationElement,
@@ -56,23 +56,26 @@ export default function CheckoutForm() {
         return;
       }
 
+      localStorage.setItem("confirm", true)
+
       setIsLoading(true);
 
       const { error } = await stripe.confirmPayment({
         elements,
         confirmParams: {
-          return_url: "https://web-central-pets.vercel.app",
+          return_url: "https://web-central-pets.vercel.app"
+          //return_url: "http://localhost:5173/confirmar-pago"
         }
       });
 
-      console.log("AAAAAAAAAA "+ error);
+      localStorage.removeItem("confirm")
 
       if (error.type === "card_error" || error.type === "validation_error") {
         setMessage(error.message);
-        console.log(error.message);
+        localStorage.setItem("confirm", false)
       } else {
-        console.log(error.message);
         setMessage(error.message);
+        localStorage.setItem("confirm", false)
       }
 
       setIsLoading(false);
