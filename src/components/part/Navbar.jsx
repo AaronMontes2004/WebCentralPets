@@ -126,7 +126,7 @@ const Navbar = () => {
             </button>
           </div>  
         </nav>
-        <div className={'bottom-5 left-5 md:hidden rounded-full overflow-hidden cursor-pointer animate-bounce hover:animate-none hover:shadow-sm z-20 '+(iconStatus ? "fixed" : "hidden" )} >
+        <div className={'bottom-5 left-5 md:hidden rounded-full overflow-hidden cursor-pointer animate-bounce hover:animate-none hover:shadow-sm z-20 '+(iconStatus ? "fixed" : "hidden" )} onClick={() => {navigate("/consulta-producto")}}>
           <div className='bg-overall-600 w-12 h-12'>
             <img src={shoppingBagIcon} alt="Productos" className='w-full h-full scale-[0.6]'/>
           </div>

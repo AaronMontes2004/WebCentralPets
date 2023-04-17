@@ -63,7 +63,7 @@ export default function CheckoutForm() {
       const { error } = await stripe.confirmPayment({
         elements,
         confirmParams: {
-          return_url: "https://web-central-pets.vercel.app"
+          return_url: "https://web-central-pets.vercel.app/confirmar-pago"
           //return_url: "http://localhost:5173/confirmar-pago"
         }
       });
