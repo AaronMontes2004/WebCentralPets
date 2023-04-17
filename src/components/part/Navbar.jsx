@@ -20,7 +20,7 @@ const Navbar = () => {
   const [permission, setPermission] = useState(true)
   const [checkedUser, setCheckedUser] = useState(false)
   const [openShoppingCart, setOpenShoppingCart] = useState(false)
-  const {precioTotal, iconStatus, setWordToSearch} = useContext(GeneralContext)
+  const {precioTotal, iconStatus, wordToSearch, setWordToSearch, setSearchProductConfirm, searchProductConfirm} = useContext(GeneralContext)
 
   const [user, setUser] = useState({
     nameUser: Cookies.get("name") || "",
@@ -82,7 +82,7 @@ const Navbar = () => {
           <div className='flex justify-center items-center py-4 px-1 min-w-[130px] w-1/2 sm:w-1/3'>
             <div className='flex relative w-full'>
               <input type="text" placeholder='Buscar un producto' className='py-1 pl-2 pr-8 outline-none rounded-lg w-full relative font-dosis' onChange={(e) => {setWordToSearch(e.target.value)}}/> 
-              <img src={searchIcon} alt="Search" className='h-full inline-block absolute right-0 p-1 cursor-pointer' onClick={() => {alert("XDDDD")}}/>
+              <img src={searchIcon} alt="Search" className='h-full inline-block absolute right-0 p-1 cursor-pointer' onClick={wordToSearch ? () => {setSearchProductConfirm(!searchProductConfirm), navigate("/buscar-producto")} : () => {}}/>
             </div>
           </div>
           <div className='flex justify-center items-center py-4 px-2 gap-8'>
@@ -92,7 +92,7 @@ const Navbar = () => {
                 <span className='text-lg font-dosis text-white hidden px-1 xl:inline-block duration-200'>Productos</span>
               </div>
             </button>
-            <button className='relative text-center justify-center items-center w-auto hidden md:flex z-40 cursor-default'>
+            <button className='md:relative text-center justify-center items-center w-auto hidden md:flex z-40 cursor-default'>
               <div className='relative text-center justify-center items-center w-auto duration-200 hover:scale-105 hidden md:flex z-40 cursor-pointer'>
                 <div className='relative' onClick={() => {/* navigate("/carrito-compras") */ setOpenShoppingCart(!openShoppingCart)}}>
                   <img src={shoppingCartIcon} alt="Carrito de compras" className='w-8 h-8'/>

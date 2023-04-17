@@ -4,6 +4,7 @@ import { createContext, useEffect, useState } from "react";
 export const GeneralContext = createContext()
 
 import React from 'react'
+import { baseURL } from "../libs/baseURL";
 
 const GeneralStatus = ({children}) => {
 
@@ -38,6 +39,8 @@ const GeneralStatus = ({children}) => {
   // Search product
 
   const [wordToSearch, setWordToSearch] = useState("")
+  const [productsForName, setProductsForName] = useState([])
+  const [searchProductConfirm, setSearchProductConfirm] = useState(false)
 
   const addProductToLocalStorage = async (p) => {
     const productsShoppingCart = localStorage.getItem("shoppingCart")
@@ -77,6 +80,22 @@ const GeneralStatus = ({children}) => {
     localStorage.setItem("shoppingCart", JSON.stringify([...data]))
     setProductChanges(!productChanges)
   } 
+
+  const productsByName = async() => {
+    try {
+      if (wordToSearch === "" || wordToSearch === null){
+        const productsName = await baseURL.get("product")
+        console.log(productsName.data.data);
+        setProductsForName(productsName.data.data)
+      } else {
+        const productsName = await baseURL.get("product/filter/"+wordToSearch)
+        console.log(productsName.data.data);
+        setProductsForName(productsName.data.data)
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   
   useEffect(() => {
     setProductTable(JSON.parse(localStorage.getItem("shoppingCart") || "[]"))
@@ -95,8 +114,12 @@ const GeneralStatus = ({children}) => {
     setTotalPagar(c)
   }, [productChanges])
 
+  useEffect(() => {
+    productsByName()
+  }, [searchProductConfirm])
+
   return (
-    <GeneralContext.Provider value={{on, setOn, status, setStatus, message, setMessage, user, setUser, categoryId, setCategoryId, listQuantity, setListQuantity, addProductToLocalStorage, removeProductFromLocalStorage, productTable, precioTotal, iconStatus, setIconStatus, addAmount, subtractAmount, totalProductos, totalPagar, activateSelectProduct, setActivateSelectProduct, selectedProduct, setSelectedProduct, index, setIndex, wordToSearch, setWordToSearch}}>
+    <GeneralContext.Provider value={{on, setOn, status, setStatus, message, setMessage, user, setUser, categoryId, setCategoryId, listQuantity, setListQuantity, addProductToLocalStorage, removeProductFromLocalStorage, productTable, precioTotal, iconStatus, setIconStatus, addAmount, subtractAmount, totalProductos, totalPagar, activateSelectProduct, setActivateSelectProduct, selectedProduct, setSelectedProduct, index, setIndex, wordToSearch, setWordToSearch, productsForName, setSearchProductConfirm, searchProductConfirm}}>
         {children}
     </GeneralContext.Provider>
   )
