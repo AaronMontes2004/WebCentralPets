@@ -41,10 +41,18 @@
     }
 
     .clip-circle-off {
-        clip-path: circle(0.4% at 100% 0);
+        clip-path: circle(0% at 50% 50%);
     }
     
     .clip-circle-on {
+        clip-path: circle(70.7% at 50% 50%);
+    }
+
+    .clip-circle-tr-off {
+        clip-path: circle(0% at 100% 0);
+    }
+    
+    .clip-circle-tr-on {
         clip-path: circle(141.2% at 100% 0);
     }
 }

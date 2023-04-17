@@ -25,11 +25,12 @@ import Map from "../part/Map";
 import Footer from "../part/Footer";
 import { baseURL } from "../libs/baseURL";
 import { GeneralContext } from "../context/GeneralStatus";
+import SelectedProduct from "../part/SelectedProduct";
 
 const Menu = () => {
   const [productsVestments, setProductsVestments] = useState([])
   const [productsCosmetics, setProductsCosmetics] = useState([])
-  const { setCategoryId, setIconStatus } = useContext(GeneralContext)
+  const { setCategoryId, setIconStatus, setSelectedProduct, setActivateSelectProduct } = useContext(GeneralContext)
   /* const [user, setUser] = useState({
     nameUser: Cookies.get("name") || "",
     lastnameUser: Cookies.get("lastname") || "",
@@ -89,16 +90,16 @@ const Menu = () => {
 
   const listProductsVestments = async () => {
     try {
-      const productsList = await baseURL.get("product/findByIdCategory/2")
+      const productsList = await baseURL.get("product/findByIdCategory/1")
       const productLength = productsList.data.data.length
       let arrayTest = []
       let list = []
-
-      if (arrayTest.length === 0){
+      
+      if (productLength === 0){
         return;
       }
 
-      if (arrayTest.length < 4){
+      if (productLength < 4){
         if (arrayTest.length === 3){
           list = [productsList.data.data[0], productsList.data.data[1], productsList.data.data[2]]
         } else if (arrayTest.length === 2){
@@ -343,55 +344,29 @@ const Menu = () => {
         <div className="relative w-[90%] mt-6 xl:w-max">
           <div className="w-full flex justify-between items-center">
             <h1 className="font-dosis text-xl">Vestimentas:</h1>
-            <Link className="font-dosis py-2 px-8 rounded-2xl bg-overall-600 text-white duration-200 hover:scale-105" href="">Ver más</Link>
+            <Link className="font-dosis py-2 px-8 rounded-2xl bg-overall-600 text-white duration-200 hover:scale-95 hover:bg-overall-800" href="">Ver más</Link>
           </div>
           <div className="w-full flex justify-center flex-wrap gap-y-5 gap-x-3 py-4 xl:gap-x-8">
-            <div className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
-              <div className="w-[80%] h-24 md:h-36 lg:h-44 xl:h-48 rounded-md overflow-hidden relative">
-                <img src={vestimentaDog1} alt="Vestimenta" className="w-full h-full object-cover" />
-              </div>
-              <div className="w-[80%] overflow-hidden relative">
-                <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl">Ropa decorativa</h1>
-                <h1 className="font-dosis w-full truncate xl:text-xl">S/ 12.00</h1>
-                <a href="#" className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</a>
-              </div>
-            </div>
-            <div className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
-              <div className="w-[80%] h-24 md:h-36 lg:h-44 xl:h-48 rounded-md overflow-hidden relative">
-                <img src={vestimentaCat1} alt="Vestimenta" className="w-full h-full object-cover" />
-              </div>
-              <div className="w-[80%] overflow-hidden relative">
-                <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl">Ropa decorativa</h1>
-                <h1 className="font-dosis w-full truncate xl:text-xl">S/ 12.00</h1>
-                <a href="#" className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</a>
-              </div>
-            </div>
-            <div className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
-              <div className="w-[80%] h-24 md:h-36 lg:h-44 xl:h-48 rounded-md overflow-hidden relative">
-                <img src={vestimentaCat2} alt="Vestimenta" className="w-full h-full object-cover" />
-              </div>
-              <div className="w-[80%] overflow-hidden relative">
-                <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl">Ropa decorativa</h1>
-                <h1 className="font-dosis w-full truncate xl:text-xl">S/ 12.00</h1>
-                <a href="#" className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</a>
-              </div>
-            </div>
-            <div className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
-              <div className="w-[80%] h-24 md:h-36 lg:h-44 xl:h-48 rounded-md overflow-hidden relative">
-                <img src={vestimentaDog2} alt="Vestimenta" className="w-full h-full object-cover" />
-              </div>
-              <div className="w-[80%] overflow-hidden relative">
-                <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl">Ropa decorativa</h1>
-                <h1 className="font-dosis w-full truncate xl:text-xl">S/ 12.00</h1>
-                <a href="#" className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</a>
-              </div>
-            </div>
+            {
+              productsVestments.map(p => (
+                <div key={p.idProducto} className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
+                  <div className="w-[80%] h-24 md:h-36 lg:h-44 xl:h-48 rounded-md overflow-hidden relative">
+                    <img src={p.imagenProducto} alt="Vestimenta" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="w-[80%] overflow-hidden relative">
+                    <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl" title={p.nombreProducto}>{p.nombreProducto}</h1>
+                    <h1 className="font-dosis w-full truncate xl:text-xl">{"S/ "+p.precioProducto}</h1>
+                    <Link className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95 cursor-pointer" onClick={() => {setSelectedProduct(p), setActivateSelectProduct(true)}}>Ver producto</Link>
+                  </div>
+                </div>
+              ))
+            }
           </div>
         </div>
         <div className="relative w-[90%] mt-6 xl:w-max">
           <div className="w-full flex justify-between items-center">
             <h1 className="font-dosis text-xl">Cosméticos:</h1>
-            <Link className="font-dosis py-2 px-8 rounded-2xl bg-overall-600 text-white duration-200 hover:scale-105" href="">Ver más</Link>
+            <Link className="font-dosis py-2 px-8 rounded-2xl bg-overall-600 text-white duration-200 hover:scale-95 hover:bg-overall-800" href="">Ver más</Link>
           </div>
           <div className="w-full flex justify-center flex-wrap gap-y-5 gap-x-3 py-4 xl:gap-x-8">
             {
@@ -401,43 +376,13 @@ const Menu = () => {
                     <img src={p.imagenProducto} alt="Vestimenta" className="w-full h-full object-cover" />
                   </div>
                   <div className="w-[80%] overflow-hidden relative">
-                    <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl">{p.nombreProducto}</h1>
+                    <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl" title={p.nombreProducto}>{p.nombreProducto}</h1>
                     <h1 className="font-dosis w-full truncate xl:text-xl">{"S/ "+p.precioProducto}</h1>
-                    <Link to={"/consulta-producto"} className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</Link>
+                    <Link className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95 cursor-pointer" onClick={() => {setSelectedProduct(p), setActivateSelectProduct(true)}}>Ver producto</Link>
                   </div>
                 </div>
               ))
             }
-            {/* <div className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
-              <div className="w-[80%] h-24 md:h-36 lg:h-44 xl:h-48 rounded-md overflow-hidden relative">
-                <img src={cosmeticoCat1} alt="Vestimenta" className="w-full h-full object-cover" />
-              </div>
-              <div className="w-[80%] overflow-hidden relative">
-                <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl">Ropa decorativa</h1>
-                <h1 className="font-dosis w-full truncate xl:text-xl">S/ 12.00</h1>
-                <a href="#" className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</a>
-              </div>
-            </div>
-            <div className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
-              <div className="w-[80%] h-24 md:h-36 lg:h-44 xl:h-48 rounded-md overflow-hidden relative">
-                <img src={cosmeticoCat2} alt="Vestimenta" className="w-full h-full object-cover" />
-              </div>
-              <div className="w-[80%] overflow-hidden relative">
-                <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl">Ropa decorativa</h1>
-                <h1 className="font-dosis w-full truncate xl:text-xl">S/ 12.00</h1>
-                <a href="#" className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</a>
-              </div>
-            </div>
-            <div className="w-32 md:w-44 lg:w-56 xl:w-64 rounded-md shadow-xl overflow-hidden flex flex-col items-center pt-3 md:pt-4 lg:pt-5 xl:pt-6 pb-2 md:pb-3 lg:pb-4 xl:pb-5">
-              <div className="w-[80%] h-24 md:h-36 lg:h-44 xl:h-48 rounded-md overflow-hidden relative">
-                <img src={cosmeticoDog2} alt="Vestimenta" className="w-full h-full object-cover" />
-              </div>
-              <div className="w-[80%] overflow-hidden relative">
-                <h1 className="font-dosis font-bold w-full truncate my-1 xl:text-xl">Ropa decorativa</h1>
-                <h1 className="font-dosis w-full truncate xl:text-xl">S/ 12.00</h1>
-                <a href="#" className="w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95">Ver producto</a>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
@@ -493,6 +438,7 @@ const Menu = () => {
           <Map/>
         </div>
       </div>
+      <SelectedProduct/>
       <Footer/>
     </>
   );

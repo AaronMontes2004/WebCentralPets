@@ -5,12 +5,12 @@ import arrowRight from "../../assets/icons/arrowRight.svg"
 import { baseURL } from '../libs/baseURL'
 import { Link } from 'react-router-dom'
 import Footer from '../part/Footer'
+import SelectedProduct from '../part/SelectedProduct'
 
 const ListProducts = () => {
 
   const [products, setProducts] = useState([])
-  const [index, setIndex] = useState(0)
-  const { listQuantity, setListQuantity, categoryId, addProductToLocalStorage, setIconStatus } = useContext(GeneralContext)
+  const { listQuantity, setListQuantity, categoryId, addProductToLocalStorage, setIconStatus, setSelectedProduct, setActivateSelectProduct, index, setIndex } = useContext(GeneralContext)
   const [array, setArray] = useState([])
 
   const listProducts = async () => {
@@ -24,12 +24,12 @@ const ListProducts = () => {
   }
 
   const operation = async (data) => {
-    const listQuantityTest = [...data, ...data, ...data].length;
+    const listQuantityTest = data?.length;
     let quantity = Math.ceil(listQuantityTest/10);
     setIndex(quantity)
     let indice = listQuantity * 10
 
-    let list = [...data, ...data, ...data]
+    let list = data
 
     const newResponse = list.slice(indice - 10, indice )
 
@@ -50,7 +50,11 @@ const ListProducts = () => {
 
   useEffect(() => {
     setIconStatus(true)
-  })
+  },[])
+
+  useEffect(() => {
+    setListQuantity(1)
+  }, [categoryId])
 
   return (
     <>
@@ -71,9 +75,9 @@ const ListProducts = () => {
                     <img src={p.imagenProducto} alt="Vestimenta" className="w-full h-full object-cover" />
                   </div>
                   <div className="w-[80%] overflow-hidden relative">
-                    <h1 className="font-dosis text-sm font-bold w-full truncate my-1 xl:text-xl md:text-base lg:text-lg">{p.nombreProducto}</h1>
+                    <h1 className="font-dosis text-sm font-bold w-full truncate my-1 xl:text-xl md:text-base lg:text-lg" title={p.nombreProducto}>{p.nombreProducto}</h1>
                     <h1 className="font-dosis text-sm w-full truncate xl:text-xl md:text-base lg:text-lg">{"S/ "+p.precioProducto}</h1>
-                    <Link to={"/product/"+p.idProducto} className="px-2 text-[11px] w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-overall-900 md:truncate xl:text-lg duration-200 hover:bg-overall-800 hover:scale-95 md:text-base lg:text-lg">Ver detalles</Link>
+                    <Link onClick={() => {setSelectedProduct(p), setActivateSelectProduct(true)}} className="px-2 text-[11px] w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-overall-900 md:truncate xl:text-lg duration-200 cursor-pointer hover:bg-overall-800 hover:scale-95 md:text-base lg:text-lg">Ver detalles</Link>
                     <Link onClick={() => addProductToLocalStorage(p)} className="px-2 text-[11px] w-full inline-block font-dosis text-white rounded-lg text-center py-1.5 mt-2 bg-orange-600 md:truncate xl:text-lg duration-200 hover:bg-orange-500 hover:scale-95 md:text-base lg:text-lg hover:cursor-pointer">Agregar al carrito</Link>
                   </div>
                 </div>

@@ -20,7 +20,7 @@ const Navbar = () => {
   const [permission, setPermission] = useState(true)
   const [checkedUser, setCheckedUser] = useState(false)
   const [openShoppingCart, setOpenShoppingCart] = useState(false)
-  const {precioTotal, iconStatus} = useContext(GeneralContext)
+  const {precioTotal, iconStatus, setWordToSearch} = useContext(GeneralContext)
 
   const [user, setUser] = useState({
     nameUser: Cookies.get("name") || "",
@@ -81,7 +81,7 @@ const Navbar = () => {
           </div>
           <div className='flex justify-center items-center py-4 px-1 min-w-[130px] w-1/2 sm:w-1/3'>
             <div className='flex relative w-full'>
-              <input type="text" placeholder='Buscar un producto' className='py-1 pl-2 pr-8 outline-none rounded-lg w-full relative font-dosis'/> 
+              <input type="text" placeholder='Buscar un producto' className='py-1 pl-2 pr-8 outline-none rounded-lg w-full relative font-dosis' onChange={(e) => {setWordToSearch(e.target.value)}}/> 
               <img src={searchIcon} alt="Search" className='h-full inline-block absolute right-0 p-1 cursor-pointer' onClick={() => {alert("XDDDD")}}/>
             </div>
           </div>
@@ -99,7 +99,7 @@ const Navbar = () => {
                 </div>
                 <span onClick={() => {/* navigate("/carrito-compras") */ setOpenShoppingCart(!openShoppingCart)}} className='text-lg font-dosis text-white hidden px-1 xl:inline-block'>Mi carrito</span>
               </div>
-              <div className={'absolute max-h-[21rem] shadow-md w-96 duration-300 top-full bg-white flex flex-col translate-y-3 translate-x-2 right-0 rounded-lg items-center gap-4 overflow-hidden z-40 modify-scroll '+(openShoppingCart ? "h-auto overflow-y-auto py-4 clip-circle-on" : "clip-circle-off")}>
+              <div className={'absolute max-h-[21rem] shadow-md w-96 duration-300 top-full bg-white flex flex-col translate-y-3 translate-x-2 right-0 rounded-lg items-center gap-4 overflow-hidden z-40 modify-scroll '+(openShoppingCart ? "h-auto overflow-y-auto py-4 clip-circle-tr-on" : "clip-circle-tr-off")}>
                 <ShoppingCart/>
                 <div className='w-11/12 border-[1px] px-10 border-t-black flex pt-4 pb-2 justify-between'>
                   <p className='font-dosis text-base font-bold'>Precio total:</p>
@@ -126,9 +126,9 @@ const Navbar = () => {
             </button>
           </div>  
         </nav>
-        <div className={'bottom-5 left-5 md:hidden rounded-full overflow-hidden cursor-pointer animate-bounce hover:animate-none hover:shadow-sm z-20 '+(iconStatus ? "fixed" : "hidden" )}>
-          <div className='bg-overall-900 w-12 h-12'>
-            <img src={shoppingBagIcon} alt="Mi carrito" className='w-full h-full scale-[0.6]'/>
+        <div className={'bottom-5 left-5 md:hidden rounded-full overflow-hidden cursor-pointer animate-bounce hover:animate-none hover:shadow-sm z-20 '+(iconStatus ? "fixed" : "hidden" )} >
+          <div className='bg-overall-600 w-12 h-12'>
+            <img src={shoppingBagIcon} alt="Productos" className='w-full h-full scale-[0.6]'/>
           </div>
         </div>
         <div className={'bottom-5 right-5 md:hidden rounded-full overflow-hidden cursor-pointer animate-bounce hover:animate-none hover:shadow-sm z-20 '+(iconStatus ? "fixed" : "hidden" )}>
@@ -138,7 +138,7 @@ const Navbar = () => {
         </div>
         <div className={'fixed bottom-20 right-5 md:bottom-5 rounded-full overflow-hidden cursor-pointer animate-bounce hover:animate-none hover:shadow-sm z-20 translate-y-96 '+(permission ? "block" : "hidden")}>
           <div className='bg-sky-500 w-12 h-12'>
-            <img src={keyIcon} alt="Mi carrito" className='w-full h-full scale-[0.6]'/>
+            <img src={keyIcon} alt="Administrador" className='w-full h-full scale-[0.6]'/>
           </div>
         </div>
         <Outlet/>

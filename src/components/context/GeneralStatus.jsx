@@ -28,6 +28,16 @@ const GeneralStatus = ({children}) => {
   const [iconStatus, setIconStatus] = useState(true)
   const [totalProductos, setTotalProductos] = useState(0)
   const [totalPagar, setTotalPagar] = useState(0)
+  const [index, setIndex] = useState(0)
+
+  // Selected Product
+
+  const [activateSelectProduct, setActivateSelectProduct] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState({})
+
+  // Search product
+
+  const [wordToSearch, setWordToSearch] = useState("")
 
   const addProductToLocalStorage = async (p) => {
     const productsShoppingCart = localStorage.getItem("shoppingCart")
@@ -86,7 +96,7 @@ const GeneralStatus = ({children}) => {
   }, [productChanges])
 
   return (
-    <GeneralContext.Provider value={{on, setOn, status, setStatus, message, setMessage, user, setUser, categoryId, setCategoryId, listQuantity, setListQuantity, addProductToLocalStorage, removeProductFromLocalStorage, productTable, precioTotal, iconStatus, setIconStatus, addAmount, subtractAmount, totalProductos, totalPagar}}>
+    <GeneralContext.Provider value={{on, setOn, status, setStatus, message, setMessage, user, setUser, categoryId, setCategoryId, listQuantity, setListQuantity, addProductToLocalStorage, removeProductFromLocalStorage, productTable, precioTotal, iconStatus, setIconStatus, addAmount, subtractAmount, totalProductos, totalPagar, activateSelectProduct, setActivateSelectProduct, selectedProduct, setSelectedProduct, index, setIndex, wordToSearch, setWordToSearch}}>
         {children}
     </GeneralContext.Provider>
   )
