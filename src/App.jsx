@@ -1,4 +1,4 @@
-import { Routes, BrowserRouter, Route } from 'react-router-dom'
+import { Routes, BrowserRouter, Route, HashRouter } from 'react-router-dom'
 import Login from './components/private/Login'
 import ValidateUser from './components/part/ValidateUser'
 import Signup from './components/private/Signup'
@@ -21,7 +21,7 @@ function App() {
   },[])
 
   return (
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           {/* <Route path='/' element={<Menu/>}/> */}
           <Route element={<ValidateUser/>}>
@@ -39,7 +39,7 @@ function App() {
           <Route path='/realizar-pago' element={<PayProduct/>} errorElement={<ErrorElement/>}/>
           <Route path='/confirmar-pago' element={<ConfirmPayment/>} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
   )
 }
 
