@@ -17,7 +17,7 @@ const SelectedProduct = () => {
         <div className='w-3/4 flex flex-col items-center justify-center mt-5 md:flex-row md:gap-5'>
           <img src={selectedProduct.imagenProducto || ""} alt="Producto" className='w-36 h-36 object-cover rounded-md md:w-48 md:h-48' />
           <div className='w-full flex flex-col justify-center items-center my-5 md:gap-2'>
-            <h1 className='font-dosis truncate text-lg font-bold text-center' title={selectedProduct.nombreProducto || ""}>{selectedProduct.nombreProducto || ""}</h1>
+            <h1 className='font-dosis text-lg font-bold text-center' title={selectedProduct.nombreProducto || ""}>{selectedProduct.nombreProducto || ""}</h1>
             <p className='font-dosis text-center'>{selectedProduct.descripcionProducto || ""}</p>
             <div className='w-full flex justify-around mt-2'>
               <p className='font-dosis font-bold'>Marca:</p>

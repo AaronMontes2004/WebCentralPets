@@ -344,7 +344,7 @@ const Menu = () => {
         <div className="relative w-[90%] mt-6 xl:w-max">
           <div className="w-full flex justify-between items-center">
             <h1 className="font-dosis text-xl">Vestimentas:</h1>
-            <Link className="font-dosis py-2 px-8 rounded-2xl bg-overall-600 text-white duration-200 hover:scale-95 hover:bg-overall-800" href="">Ver más</Link>
+            <Link to={"/consulta-producto"} className="font-dosis py-2 px-8 rounded-2xl bg-overall-600 text-white duration-200 hover:scale-95 hover:bg-overall-800" href="">Ver más</Link>
           </div>
           <div className="w-full flex justify-center flex-wrap gap-y-5 gap-x-3 py-4 xl:gap-x-8">
             {
@@ -366,7 +366,7 @@ const Menu = () => {
         <div className="relative w-[90%] mt-6 xl:w-max">
           <div className="w-full flex justify-between items-center">
             <h1 className="font-dosis text-xl">Cosméticos:</h1>
-            <Link className="font-dosis py-2 px-8 rounded-2xl bg-overall-600 text-white duration-200 hover:scale-95 hover:bg-overall-800" href="">Ver más</Link>
+            <Link to={"/consulta-producto"} className="font-dosis py-2 px-8 rounded-2xl bg-overall-600 text-white duration-200 hover:scale-95 hover:bg-overall-800">Ver más</Link>
           </div>
           <div className="w-full flex justify-center flex-wrap gap-y-5 gap-x-3 py-4 xl:gap-x-8">
             {
