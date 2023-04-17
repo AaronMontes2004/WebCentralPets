@@ -132,7 +132,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className={'bottom-5 right-5 md:hidden rounded-full overflow-hidden cursor-pointer animate-bounce hover:animate-none hover:shadow-sm z-20 '+(iconStatus ? "fixed" : "hidden" )}>
-          <div className='bg-orange-600 w-12 h-12'>
+          <div className='bg-orange-600 w-12 h-12' onClick={() => {navigate("/realizar-compra")}}>
             <img src={shoppingCartIcon} alt="Mi carrito" className='w-full h-full scale-[0.6]'/>
           </div>
         </div>
